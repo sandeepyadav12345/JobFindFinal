@@ -8,7 +8,7 @@ import {isMongoId} from 'class-validator';
 import {ObjectId} from 'mongodb';
 
 @Injectable()
-export class AdminJwtStrategy extends PassportStrategy(Strategy) {
+export class JwtStrategy extends PassportStrategy(Strategy) {
 
   constructor(private readonly config: ConfigService,
               private readonly authService: AuthService) {
@@ -22,6 +22,5 @@ export class AdminJwtStrategy extends PassportStrategy(Strategy) {
     const id = payload.sub;
     if (!id && !isMongoId(id)) throw new UnauthorizedException();
     return this.authService.validateAdmin(new ObjectId(id));
-  }
-  
+  }  
 }

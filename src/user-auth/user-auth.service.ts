@@ -29,7 +29,6 @@ export class UserAuthService {
     return this.jwtService.sign({sub: user._id});
   }
 
-
   public validateUser(id: ObjectId): Promise<User> {
     return this.userService.getOneByIdOrFail(id)
       .catch(() => {

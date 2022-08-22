@@ -3,7 +3,7 @@ import {PassportModule} from '@nestjs/passport';
 import {ConfigModule, ConfigService} from '@nestjs/config';
 import {JwtModule} from '@nestjs/jwt';
 import {AuthService} from './auth.service';
-import {AdminJwtStrategy} from './jwt.strategy';
+import { JwtStrategy} from './jwt.strategy';
 import {AdminModule} from '../admin/admin.module';
 import {AuthResolver} from './auth.resolver';
 
@@ -13,8 +13,7 @@ import {AuthResolver} from './auth.resolver';
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: (config: ConfigService) => ({
-        //secret: config.get<string>('ACCESS_SECRET'),
-        secret:'adminsecret',
+        secret: config.get<string>('ACCESS_SECRET'),
         signOptions: {expiresIn: config.get<string>('ACCESS_EXPIRES_IN')}
       }),
       inject: [ConfigService]
@@ -24,7 +23,7 @@ import {AuthResolver} from './auth.resolver';
   providers: [
     AuthResolver,
     AuthService,
-    AdminJwtStrategy
+    JwtStrategy
   ]
 })
 export class AuthModule {

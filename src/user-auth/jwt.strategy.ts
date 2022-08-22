@@ -8,7 +8,7 @@ import { User } from '../users/users';
 import { UserAuthService } from './user-auth.service';
 
 @Injectable()
-export class UserJwtStrategy extends PassportStrategy(Strategy) {
+export class JwtStrategy extends PassportStrategy(Strategy) {
 
   constructor(private readonly config: ConfigService,
               private readonly userAuthService: UserAuthService) {
@@ -22,6 +22,5 @@ export class UserJwtStrategy extends PassportStrategy(Strategy) {
     const id = payload.sub;
     if (!id && !isMongoId(id)) throw new UnauthorizedException();
     return this.userAuthService.validateUser(new ObjectId(id));
-  }
-  
+  }  
 }

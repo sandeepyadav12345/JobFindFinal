@@ -3,9 +3,9 @@ import {Admin} from '../admin/admin';
 import {AdminRegisterInput} from './dto/adminregister.input';
 import {AuthService} from './auth.service';
 import {AdminLoginInput} from './dto/adminlogin.input';
-import {CurrentAdmin} from './current-admin.decorator';
+import {CurrentUser} from '../common/current-user.decorator';
 import {UseGuards} from '@nestjs/common';
-import {AdminJwtGuard} from './jwt.guard';
+import { JwtGuard} from '../common/jwt.guard';
 
 
 
@@ -25,8 +25,8 @@ export class AuthResolver {
   }
 
   @Query(() => Admin)
-  @UseGuards(AdminJwtGuard)
-  adminProfile(@CurrentAdmin() admin: Admin): Admin {
+  @UseGuards(JwtGuard)
+  adminProfile(@CurrentUser() admin: Admin): Admin {
     return admin;
   }
 

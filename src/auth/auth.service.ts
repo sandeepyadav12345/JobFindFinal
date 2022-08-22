@@ -32,10 +32,10 @@ export class AuthService {
   }
 
   public validateAdmin(id: ObjectId): Promise<Admin> {
-    return this.adminService.getOneByIdOrFail(id);
-      //  .catch(() => {
-      //    throw new UnauthorizedException();
-      //  });
+    return this.adminService.getOneByIdOrFail(id)
+       .catch(() => {
+         throw new UnauthorizedException();
+       });
   }
 
   private async encodePassword(password: string): Promise<string> {

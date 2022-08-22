@@ -1,7 +1,7 @@
 import {Args, Mutation, Query,  Resolver} from '@nestjs/graphql';
-import {CurrentUser} from './current-user.decorator';
+import {CurrentUser} from '../common/current-user.decorator';
 import {UseGuards} from '@nestjs/common';
-import {UserJwtGuard} from './jwt.guard';
+import {JwtGuard} from '../common/jwt.guard';
 import { User } from '../users/users';
 import { UserRegisterInput } from './dto/userregister.input';
 import { UserLoginInput } from './dto/userlogin.input';
@@ -24,7 +24,7 @@ export class UserAuthResolver {
   }
 
   @Query(() => User)
-  @UseGuards(UserJwtGuard)
+  @UseGuards(JwtGuard)
   userProfile(@CurrentUser() user: User): User {
     return user;
   }
