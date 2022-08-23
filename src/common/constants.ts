@@ -1,6 +1,6 @@
 export enum Constants {
   AdminRef = 'admin',
   JobRef ='job',
-  UserRef = 'user'
-
+  UserRef = 'user',
+  refresh = 'adminrefresh'
 }

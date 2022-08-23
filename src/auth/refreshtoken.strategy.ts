@@ -9,13 +9,14 @@ import {ObjectId} from 'mongodb';
 import { Constants } from 'src/common/constants';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy, Constants.AdminRef) {
+export class RefreshTokenStrategy extends PassportStrategy(Strategy, Constants.AdminRef) {
 
   constructor(private readonly config: ConfigService,
               private readonly authService: AuthService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: config.get<string>('ACCESS_SECRET'),
+      passReqToCallback: true,
     });
   }
 

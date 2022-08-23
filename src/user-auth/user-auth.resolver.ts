@@ -1,11 +1,13 @@
 import {Args, Mutation, Query,  Resolver} from '@nestjs/graphql';
 import {CurrentUser} from '../common/current-user.decorator';
 import {UseGuards} from '@nestjs/common';
-import {JwtGuard} from '../common/jwt.guard';
+import {JwtGuard} from './jwt.guard';
 import { User } from '../users/users';
 import { UserRegisterInput } from './dto/userregister.input';
 import { UserLoginInput } from './dto/userlogin.input';
 import { UserAuthService } from './user-auth.service';
+import { AuthGuard } from '@nestjs/passport';
+import { Constants } from 'src/common/constants';
 
 
 @Resolver(()=> User)

@@ -6,9 +6,10 @@ import {isMongoId} from 'class-validator';
 import {ObjectId} from 'mongodb';
 import { User } from '../users/users';
 import { UserAuthService } from './user-auth.service';
+import { Constants } from 'src/common/constants';
 
 @Injectable()
-export class JwtStrategy extends PassportStrategy(Strategy) {
+export class JwtStrategy extends PassportStrategy(Strategy, Constants.UserRef) {
 
   constructor(private readonly config: ConfigService,
               private readonly userAuthService: UserAuthService) {
