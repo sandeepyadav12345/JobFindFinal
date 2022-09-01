@@ -42,9 +42,10 @@ export class AuthResolver {
     return admin;
   }
 
-
-  // logout(@Req() req: Request) {
-  //   this.authService.logout(req.user['sub']);
-  // }
+  @UseGuards(RefreshJwtGuard)
+  @Mutation(()=> String)
+  logout(@CurrentUser() admin: Admin): Promise<string> {
+   return this.authService.logout(new ObjectId(admin.payload.sub));
+  }
 
 }

@@ -95,8 +95,8 @@ export class AuthService {
 
   async logout(adminId: ObjectId ) {
     const refreshToken = null;
-     
-    return this.adminService.update(adminId,  refreshToken);
+     await this.adminService.update(adminId,  refreshToken);
+     return "logged out successfully";
   }
 
   public validateAdmin(id: ObjectId): Promise<Admin> {
