@@ -18,9 +18,15 @@ export class Admin extends Document {
   email: string;
 
   @Prop({required: true})
-  password: string;
+  password: string; 
 
- 
+  @Prop({required:true})
+  refreshToken:string;
+
+  @Prop()
+  accessToken:string;
+  @Prop()
+  payload: any;
 }
 
 export const AdminSchema = SchemaFactory.createForClass(Admin);

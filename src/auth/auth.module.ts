@@ -6,24 +6,19 @@ import {AuthService} from './auth.service';
 import { JwtStrategy} from './jwt.strategy';
 import {AdminModule} from '../admin/admin.module';
 import {AuthResolver} from './auth.resolver';
+import { RefreshTokenStrategy } from './refreshtoken.strategy';
 
 @Module({
   imports: [
     PassportModule,
-    JwtModule.registerAsync({
-      imports: [ConfigModule],
-      useFactory: (config: ConfigService) => ({
-        secret: config.get<string>('ACCESS_SECRET'),
-        signOptions: {expiresIn: config.get<string>('ACCESS_EXPIRES_IN')}
-      }),
-      inject: [ConfigService]
-    }),
+    JwtModule.register({}),
     AdminModule,
   ],
   providers: [
     AuthResolver,
     AuthService,
-    JwtStrategy
+    JwtStrategy,
+    RefreshTokenStrategy,
   ]
 })
 export class AuthModule {

@@ -28,7 +28,13 @@ export class AdminService extends BaseService<Admin> {
     return super.createOne(admin);
   }
 
+  public update(id:ObjectId, refreshToken:string): Promise<Admin> {
+    return super.updateOne({_id: id},
+      {$set: { refreshToken: refreshToken}});
+  }
+
   public async getByIds(ids: ObjectId[]): Promise<Admin[]> {
+
     return super.getMany({_id: {$in: ids}});
   }
 }

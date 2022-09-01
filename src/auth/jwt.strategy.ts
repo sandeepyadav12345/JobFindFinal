@@ -8,6 +8,11 @@ import {isMongoId} from 'class-validator';
 import {ObjectId} from 'mongodb';
 import { Constants } from 'src/common/constants';
 
+type JwtPayload = {
+  sub: string;
+  email: string;
+};
+
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, Constants.AdminRef) {
 
@@ -20,8 +25,11 @@ export class JwtStrategy extends PassportStrategy(Strategy, Constants.AdminRef) 
   }
 
   public validate(payload: any): Promise<Admin> {
-    const id = payload.sub;
-    if (!id && !isMongoId(id)) throw new UnauthorizedException();
+     const id = payload.sub;
+     console.log(payload);
+     if (!id && !isMongoId(id)) throw new UnauthorizedException();
     return this.authService.validateAdmin(new ObjectId(id));
+
+   // return payload;
   }  
 }
